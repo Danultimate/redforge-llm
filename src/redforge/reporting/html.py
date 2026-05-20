@@ -205,14 +205,22 @@ def _render_result_card(result: AttackResult, *, mitigation: str | None) -> str:
 
 
 def _render_footer(scan: ScanResult) -> str:
+    rows = [
+        ("scan_id", scan.scan_id),
+        ("config_hash", scan.config_hash),
+        ("corpus_hash", scan.corpus_hash),
+        ("schema_version", scan.schema_version),
+    ]
+    items = "".join(
+        f'<div><span class="footer-key">{key}</span>'
+        f"<code>{html.escape(value)}</code></div>\n"
+        for key, value in rows
+    )
     return (
         '<footer class="footer">\n'
         '<div class="footer-inner">\n'
-        f'<div><span class="footer-key">scan_id</span><code>{html.escape(scan.scan_id)}</code></div>\n'
-        f'<div><span class="footer-key">config_hash</span><code>{html.escape(scan.config_hash)}</code></div>\n'
-        f'<div><span class="footer-key">corpus_hash</span><code>{html.escape(scan.corpus_hash)}</code></div>\n'
-        f'<div><span class="footer-key">schema_version</span><code>{html.escape(scan.schema_version)}</code></div>\n'
-        "</div>\n"
+        + items
+        + "</div>\n"
         "</footer>\n"
     )
 
