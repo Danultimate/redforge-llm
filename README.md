@@ -5,7 +5,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/redforge-llm.svg?label=pypi)](https://pypi.org/project/redforge-llm/)
 [![Python versions](https://img.shields.io/pypi/pyversions/redforge-llm.svg)](https://pypi.org/project/redforge-llm/)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![CI](https://github.com/danultimate/redforge/actions/workflows/ci.yml/badge.svg)](https://github.com/danultimate/redforge/actions/workflows/ci.yml)
+[![CI](https://github.com/Danultimate/redforge-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/Danultimate/redforge-llm/actions/workflows/ci.yml)
 [![Calibrated](https://img.shields.io/badge/calibrated-per--severity%20floors-success)](DESIGN.md#64-scorer)
 
 ![RedForge demo](docs/demo.gif)

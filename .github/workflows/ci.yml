@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -48,13 +49,11 @@ jobs:
         run: pytest tests/calibration -v -m "not real_api"
 
   real-api:
-    # Gated: only runs on internal PRs (where secrets are available) or pushes
-    # to main. External PRs from forks won't have the secret — by design.
+    # Manual-only. Trigger from the Actions tab when you want to verify
+    # against real providers — each run costs API tokens.
     runs-on: ubuntu-latest
     needs: test
-    if: |
-      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
-      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+    if: github.event_name == 'workflow_dispatch'
 
     steps:
       - uses: actions/checkout@v4

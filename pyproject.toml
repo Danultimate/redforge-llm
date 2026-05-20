@@ -52,9 +52,9 @@ dev = [
 redforge = "redforge.cli:app"
 
 [project.urls]
-Documentation = "https://github.com/danultimate/redforge#readme"
-Source = "https://github.com/danultimate/redforge"
-Issues = "https://github.com/danultimate/redforge/issues"
+Documentation = "https://github.com/Danultimate/redforge-llm#readme"
+Source = "https://github.com/Danultimate/redforge-llm"
+Issues = "https://github.com/Danultimate/redforge-llm/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/redforge"]
