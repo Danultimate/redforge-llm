@@ -46,6 +46,7 @@ dev = [
   "pytest-cov>=4,<6",
   "mypy>=1.10,<2",
   "ruff>=0.5,<1",
+  "types-PyYAML>=6",
 ]
 
 [project.scripts]
@@ -85,3 +86,10 @@ select = ["E", "F", "I", "B", "UP", "SIM"]
 python_version = "3.10"
 strict = true
 warn_unused_ignores = true
+
+# Optional provider SDKs (installed via extras). CI's `pip install -e .[dev]`
+# doesn't pull them, so mypy can't see their stubs — and they don't ship type
+# information anyway.
+[[tool.mypy.overrides]]
+module = ["anthropic", "anthropic.*", "openai", "openai.*", "httpx"]
+ignore_missing_imports = true
