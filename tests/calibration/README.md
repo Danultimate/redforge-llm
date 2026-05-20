@@ -1,6 +1,6 @@
 # Calibration Tests
 
-Per DESIGN.md §6.4 and §9, the false-positive defense lives here.
+The false-positive defense for RedForge lives in this directory.
 
 For each `(module, variant)` pair, this directory holds:
 

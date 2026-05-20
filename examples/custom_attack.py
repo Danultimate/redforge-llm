@@ -1,6 +1,6 @@
 """Custom AttackModule example.
 
-Per DESIGN.md, authors extend `AttackModule` and yield `AttackVariant` instances.
+Authors extend `AttackModule` and yield `AttackVariant` instances.
 Pass the module instance to Scanner via `attacks=[...]`.
 """
 

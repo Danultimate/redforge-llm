@@ -2,15 +2,15 @@
 
 **Adversarial testing for LLM applications. Pip install. Async-first. Reproducible.**
 
-[![PyPI version](https://img.shields.io/pypi/v/redforge-llm.svg?label=pypi)](https://pypi.org/project/redforge-llm/)
-[![Python versions](https://img.shields.io/pypi/pyversions/redforge-llm.svg)](https://pypi.org/project/redforge-llm/)
-[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![PyPI version](https://img.shields.io/pypi/v/redforge-llm?label=pypi&color=blue)](https://pypi.org/project/redforge-llm/)
+[![Python versions](https://img.shields.io/pypi/pyversions/redforge-llm?label=python)](https://pypi.org/project/redforge-llm/)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![CI](https://github.com/Danultimate/redforge-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/Danultimate/redforge-llm/actions/workflows/ci.yml)
-[![Calibrated](https://img.shields.io/badge/calibrated-per--severity%20floors-success)](DESIGN.md#64-scorer)
+[![Calibrated](https://img.shields.io/badge/calibrated-per--severity%20floors-success)](#how-scoring-works)
 
 ![RedForge demo](docs/demo.gif)
 
-> ⚠️ **Pre-release.** Prompt Injection (4 variants) and Jailbreak (5 variants) are implemented end-to-end and calibrated. APIs follow [DESIGN.md](DESIGN.md); don't depend on this in production yet.
+> ⚠️ **Pre-release.** Prompt Injection (4 variants) and Jailbreak (5 variants) are implemented end-to-end and calibrated. APIs are stabilising — don't depend on this in production yet.
 
 Point RedForge at any LLM-backed callable — a chatbot, a RAG pipeline, an agent — and get a calibrated report of where it leaks system prompts, jailbreaks under pressure, or quietly degrades. No SDK lock-in, no proprietary endpoints, no opaque scores.
 
@@ -123,7 +123,7 @@ A few specifics worth knowing:
 
 - **The heuristic is per-variant.** `PromptInjection / DirectOverride` checks for leakage markers like `"you are a"`, `"system prompt"`. `Jailbreak / *` is intentionally refusal-only — recognising disallowed-content compliance from substrings doesn't work, so anything that isn't a clean refusal escalates.
 - **Rubrics are versioned text templates.** Each `(module, variant)` pair has a versioned `RUBRIC_VERSION: v<N>` header that propagates into `Verdict.judge_model` as e.g. `claude-haiku-4-5@rubric-v1` — so you can diff calibration across rubric revisions.
-- **Calibration is enforced.** Every variant ships with a labelled set in `tests/calibration/data/` and CI gates on **per-severity precision and recall floors** (not single accuracy). See [DESIGN.md §6.4](DESIGN.md#64-scorer) for the published floor table.
+- **Calibration is enforced.** Every variant ships with a labelled set in `tests/calibration/data/` and CI gates on **per-severity precision and recall floors** (not single accuracy). Run `redforge calibrate --strict` against your own labelled set to verify the floors hold for your config.
 
 <details>
 <summary><b>Run your own calibration</b></summary>
@@ -139,6 +139,8 @@ redforge calibrate my_labels.yaml --judge-type anthropic --strict
 ## Reports
 
 Every `redforge scan` writes a self-contained `report.html` to `.redforge/runs/<scan_id>/`. Open it in any browser — no server, no internet, no dependencies.
+
+![RedForge HTML report](docs/report.png)
 
 ```
 .redforge/runs/01HXYZ.../
@@ -230,7 +232,7 @@ judge:
 | `Jailbreak / EncodingSmuggle` | ✅ calibrated |
 | `Jailbreak / TokenSmuggling` | ✅ calibrated |
 
-Deferred for post-v1: additional attack modules, agent/tool-use harness, `--resume`, multi-turn attack orchestration. See [DESIGN.md](DESIGN.md) for the roadmap, decision log, and the multi-agent design review that informed the v1 scope.
+Deferred for post-v1: additional attack modules, agent/tool-use harness, `--resume`, multi-turn attack orchestration. Track progress and propose modules via [GitHub Issues](https://github.com/Danultimate/redforge-llm/issues).
 
 ## License
 
