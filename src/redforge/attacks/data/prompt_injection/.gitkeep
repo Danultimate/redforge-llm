@@ -1,0 +1,4 @@
+# Corpus YAMLs will live here per DESIGN.md §6.2.
+# One file per variant: direct_override.yaml, indirect_injection.yaml,
+# delimiter_confusion.yaml, nested_injection.yaml.
+# Each variant additionally has a `<variant>.mitigation.md` next to it.

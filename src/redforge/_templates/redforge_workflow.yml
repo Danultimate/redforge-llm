@@ -1,0 +1,36 @@
+name: RedForge LLM Security Scan
+
+on:
+  pull_request:
+    paths:
+      - "**/*.py"
+      - "redforge.yaml"
+      - "target.py"
+
+jobs:
+  redforge-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install RedForge
+        run: pip install "redforge-llm[anthropic]"
+
+      - name: Run scan
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: redforge scan --config redforge.yaml --strict
+
+      - name: Upload scan artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redforge-run
+          path: .redforge/runs/
+          retention-days: 30
