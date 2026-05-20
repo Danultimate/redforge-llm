@@ -49,7 +49,7 @@ class AnthropicJudge(Judge):
             except ImportError as e:  # pragma: no cover
                 raise ImportError(
                     "AnthropicJudge requires the `anthropic` package. "
-                    "Install with: pip install redforge-llm[anthropic]"
+                    "Install with: pip install 'redforge-llm[anthropic]'"
                 ) from e
             key = self._api_key or os.environ.get("ANTHROPIC_API_KEY")
             if not key:

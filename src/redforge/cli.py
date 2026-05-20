@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 import typer
@@ -25,6 +26,30 @@ app = typer.Typer(
 )
 
 _console = Console()
+
+
+def _version_callback(value: bool) -> None:
+    if not value:
+        return
+    try:
+        v = version("redforge-llm")
+    except PackageNotFoundError:
+        v = "unknown"
+    typer.echo(f"redforge {v}")
+    raise typer.Exit()
+
+
+@app.callback()
+def _main(
+    show_version: bool = typer.Option(
+        False,
+        "--version",
+        callback=_version_callback,
+        is_eager=True,
+        help="Show version and exit.",
+    ),
+) -> None:
+    """Adversarial testing for LLM applications."""
 
 
 # ---------------------------------------------------------------------------

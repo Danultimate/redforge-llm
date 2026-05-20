@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "redforge-llm"
-version = "0.1.0"
+version = "0.1.1"
 description = "Adversarial testing for LLM applications. Pip install. Async-first. Reproducible."
 readme = "README.md"
 license = { text = "Apache-2.0" }

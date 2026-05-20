@@ -15,7 +15,7 @@
 Point RedForge at any LLM-backed callable — a chatbot, a RAG pipeline, an agent — and get a calibrated report of where it leaks system prompts, jailbreaks under pressure, or quietly degrades. No SDK lock-in, no proprietary endpoints, no opaque scores.
 
 ```bash
-pip install redforge-llm[anthropic]   # or .[openai], .[ollama], .[all]
+pip install "redforge-llm[anthropic]"   # or [openai], [ollama], [all]
 redforge init && redforge scan
 ```
 
@@ -41,7 +41,7 @@ redforge init && redforge scan
 **1. Install and scaffold.**
 
 ```bash
-pip install redforge-llm[anthropic]
+pip install "redforge-llm[anthropic]"
 redforge init
 ```
 

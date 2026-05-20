@@ -50,7 +50,7 @@ class OpenAIJudge(Judge):
             except ImportError as e:  # pragma: no cover
                 raise ImportError(
                     "OpenAIJudge requires the `openai` package. "
-                    "Install with: pip install redforge-llm[openai]"
+                    "Install with: pip install 'redforge-llm[openai]'"
                 ) from e
             key = self._api_key or os.environ.get("OPENAI_API_KEY")
             if not key:

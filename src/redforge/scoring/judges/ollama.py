@@ -44,7 +44,7 @@ class OllamaJudge(Judge):
         except ImportError as e:  # pragma: no cover
             raise ImportError(
                 "OllamaJudge requires the `httpx` package. "
-                "Install with: pip install redforge-llm[ollama]"
+                "Install with: pip install 'redforge-llm[ollama]'"
             ) from e
         return httpx.AsyncClient(timeout=self._timeout_s)
 
